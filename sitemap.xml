@@ -11,6 +11,12 @@
     <loc>https://maxshashkov.tech/post/</loc>
     <lastmod>2023-01-28T11:36:01+03:00</lastmod>
   </url><url>
+    <loc>https://maxshashkov.tech/about/</loc>
+    <priority>0</priority>
+  </url><url>
+    <loc>https://maxshashkov.tech/contact/</loc>
+    <priority>0</priority>
+  </url><url>
     <loc>https://maxshashkov.tech/categories/</loc>
   </url><url>
     <loc>https://maxshashkov.tech/tags/</loc>

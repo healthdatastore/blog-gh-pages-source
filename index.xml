@@ -16,5 +16,23 @@
       <description>Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed </description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://maxshashkov.tech/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxshashkov.tech/about/</guid>
+      <description>About Hi. My name is Maksim Shashkov. Currently working as an Android engineer at Avito. Never thought that working in Logistics cluster is so much fun.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://maxshashkov.tech/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://maxshashkov.tech/contact/</guid>
+      <description>How to contact with me email telegram </description>
+    </item>
+    
   </channel>
 </rss>
