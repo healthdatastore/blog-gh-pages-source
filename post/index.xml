@@ -13,7 +13,8 @@
       <pubDate>Sat, 28 Jan 2023 11:36:01 +0300</pubDate>
       
       <guid>https://maxshashkov.tech/post/ssh_tunneling/</guid>
-      <description>Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed </description>
+      <description>Local TCP forwarding Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed
+Let&amp;rsquo;s assume we have a remote server named &amp;ldquo;host 2&amp;rdquo; with application (PostgreSQL for instance) which accepts incoming connections on port 5432. Instead of connecting to port 5432 remotely (which is insecure and might be blocked by the host&amp;rsquo;s firewall) we can connect to port 32 allowed for remote connections by host&amp;rsquo;s 2 firewall.</description>
     </item>
     
   </channel>

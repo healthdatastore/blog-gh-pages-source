@@ -48,7 +48,8 @@
   
   <meta name="theme-color" />
   
-  <meta name="description" content="Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed " />
+  <meta name="description" content="Local TCP forwarding Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed
+Let&rsquo;s assume we have a remote server named &ldquo;host 2&rdquo; with application (PostgreSQL for instance) which accepts incoming connections on port 5432. Instead of connecting to port 5432 remotely (which is insecure and might be blocked by the host&rsquo;s firewall) we can connect to port 32 allowed for remote connections by host&rsquo;s 2 firewall." />
   <meta
     name="author"
     content=""
@@ -104,7 +105,8 @@
   
   
   <meta property="og:title" content="How to establish SSH tunelling between host and remote server" />
-<meta property="og:description" content="Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed " />
+<meta property="og:description" content="Local TCP forwarding Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed
+Let&rsquo;s assume we have a remote server named &ldquo;host 2&rdquo; with application (PostgreSQL for instance) which accepts incoming connections on port 5432. Instead of connecting to port 5432 remotely (which is insecure and might be blocked by the host&rsquo;s firewall) we can connect to port 32 allowed for remote connections by host&rsquo;s 2 firewall." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://maxshashkov.tech/post/ssh_tunneling/" /><meta property="article:section" content="post" />
 <meta property="article:published_time" content="2023-01-28T11:36:01+03:00" />
@@ -112,14 +114,16 @@
 
   
   <meta itemprop="name" content="How to establish SSH tunelling between host and remote server">
-<meta itemprop="description" content="Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed "><meta itemprop="datePublished" content="2023-01-28T11:36:01+03:00" />
+<meta itemprop="description" content="Local TCP forwarding Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed
+Let&rsquo;s assume we have a remote server named &ldquo;host 2&rdquo; with application (PostgreSQL for instance) which accepts incoming connections on port 5432. Instead of connecting to port 5432 remotely (which is insecure and might be blocked by the host&rsquo;s firewall) we can connect to port 32 allowed for remote connections by host&rsquo;s 2 firewall."><meta itemprop="datePublished" content="2023-01-28T11:36:01+03:00" />
 <meta itemprop="dateModified" content="2023-01-28T11:36:01+03:00" />
-<meta itemprop="wordCount" content="27">
+<meta itemprop="wordCount" content="151">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="How to establish SSH tunelling between host and remote server"/>
-<meta name="twitter:description" content="Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed "/>
+<meta name="twitter:description" content="Local TCP forwarding Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed
+Let&rsquo;s assume we have a remote server named &ldquo;host 2&rdquo; with application (PostgreSQL for instance) which accepts incoming connections on port 5432. Instead of connecting to port 5432 remotely (which is insecure and might be blocked by the host&rsquo;s firewall) we can connect to port 32 allowed for remote connections by host&rsquo;s 2 firewall."/>
 
   
   
@@ -232,8 +236,18 @@
     
   </header>
 
-  <section><h3 id="problem-you-need-to-connect-from-your-local-machine-to-postgres-db-hosted-remotely-for-example-on-vps-but-direct-remote-connections-to-database-are-not-allowed">Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed</h3>
-</section>
+  <section><h3 id="local-tcp-forwarding">Local TCP forwarding</h3>
+<blockquote>
+<p><em><strong>Problem: you need to connect from your local machine to postgres db hosted remotely (for example on VPS). But direct remote connections to database are not allowed</strong></em></p>
+</blockquote>
+<p><img src="/ssh_local.png" alt="local tcp forwarding example"></p>
+<p>Let&rsquo;s assume we have a remote server named &ldquo;host 2&rdquo; with application (PostgreSQL for instance) which accepts incoming connections on port 5432. Instead of connecting to port 5432 remotely (which is insecure and might be blocked by the host&rsquo;s firewall) we can connect to port 32 allowed for remote connections by host&rsquo;s 2 firewall.</p>
+<p>Thus, we need to connect from our app client located on our local machine (i.e. host 1) to the app server located on host 2.</p>
+<p>To do this we can type in host&rsquo;s 1 terminal next command:</p>
+<pre tabindex="0"><code>ssh -L 9999:localhost:5432 host2
+</code></pre><p>Now we can connect from our local machine to remote app. For example, for PostgreSQL it could look like:</p>
+<pre tabindex="0"><code>psql -h localhost -p 9999 -U postgres
+</code></pre></section>
 
   
   
