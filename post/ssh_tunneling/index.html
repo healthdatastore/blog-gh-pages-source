@@ -244,10 +244,10 @@ Let&rsquo;s assume we have a remote server named &ldquo;host 2&rdquo; with appli
 <p>Let&rsquo;s assume we have a remote server named &ldquo;host 2&rdquo; with application (PostgreSQL for instance) which accepts incoming connections on port 5432. Instead of connecting to port 5432 remotely (which is insecure and might be blocked by the host&rsquo;s firewall) we can connect to port 32 allowed for remote connections by host&rsquo;s 2 firewall.</p>
 <p>Thus, we need to connect from our app client located on our local machine (i.e. host 1) to the app server located on host 2.</p>
 <p>To do this we can type in host&rsquo;s 1 terminal next command:</p>
-<pre tabindex="0"><code>ssh -L 9999:localhost:5432 host2
-</code></pre><p>Now we can connect from our local machine to remote app. For example, for PostgreSQL it could look like:</p>
-<pre tabindex="0"><code>psql -h localhost -p 9999 -U postgres
-</code></pre></section>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ssh -L 9999:localhost:5432 host2
+</span></span></code></pre></div><p>Now we can connect from our local machine to remote app. For example, for PostgreSQL it could look like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>psql -h localhost -p <span style="color:#ae81ff">9999</span> -U postgres
+</span></span></code></pre></div></section>
 
   
   
