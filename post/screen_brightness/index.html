@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready text-sm lg:text-base"
+  style="--bg: #fbfbfb"
+  lang="en-us"
+>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Managing device screen brightness in your android application - Android engineer blog</title>
+
+  
+  <meta name="theme-color" />
+  
+  <meta name="description" content="Why might you need to control the brightness of the device screen? For example: You are developing an application that displays QR codes that are read by the scanner. For better readability, we need to maximize image contrast and for that we can change the brightness to the maximum.
+Before start to control screen brightness, we must answer for one question: &ldquo;Do we want to control the brightness of the screen only when our app is active, or does it need to record the setting value after our app is shut down?" />
+  <meta
+    name="author"
+    content=""
+  />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="https://maxshashkov.tech/main.min.css" />
+
+  
+  <script
+    defer
+    src="https://maxshashkov.tech/highlight.min.js"
+    onload="hljs.initHighlightingOnLoad();"
+  ></script>
+  
+
+  
+   
+  <link rel="preload" as="image" href="https://maxshashkov.tech/theme.png" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://healthdatastore.github.io/cdn/avatar100.jpg" />
+  
+  
+
+  
+
+  
+  <link rel="icon" href="https://maxshashkov.tech/favicon.ico" />
+  <link rel="apple-touch-icon" href="https://maxshashkov.tech/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.110.0">
+
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="Managing device screen brightness in your android application" />
+<meta property="og:description" content="Why might you need to control the brightness of the device screen? For example: You are developing an application that displays QR codes that are read by the scanner. For better readability, we need to maximize image contrast and for that we can change the brightness to the maximum.
+Before start to control screen brightness, we must answer for one question: &ldquo;Do we want to control the brightness of the screen only when our app is active, or does it need to record the setting value after our app is shut down?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://maxshashkov.tech/post/screen_brightness/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-02-26T11:50:01+03:00" />
+<meta property="article:modified_time" content="2023-02-26T11:50:01+03:00" />
+
+  
+  <meta itemprop="name" content="Managing device screen brightness in your android application">
+<meta itemprop="description" content="Why might you need to control the brightness of the device screen? For example: You are developing an application that displays QR codes that are read by the scanner. For better readability, we need to maximize image contrast and for that we can change the brightness to the maximum.
+Before start to control screen brightness, we must answer for one question: &ldquo;Do we want to control the brightness of the screen only when our app is active, or does it need to record the setting value after our app is shut down?"><meta itemprop="datePublished" content="2023-02-26T11:50:01+03:00" />
+<meta itemprop="dateModified" content="2023-02-26T11:50:01+03:00" />
+<meta itemprop="wordCount" content="318">
+<meta itemprop="keywords" content="" />
+  
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Managing device screen brightness in your android application"/>
+<meta name="twitter:description" content="Why might you need to control the brightness of the device screen? For example: You are developing an application that displays QR codes that are read by the scanner. For better readability, we need to maximize image contrast and for that we can change the brightness to the maximum.
+Before start to control screen brightness, we must answer for one question: &ldquo;Do we want to control the brightness of the screen only when our app is active, or does it need to record the setting value after our app is shut down?"/>
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-0.5 text-3xl font-bold"
+      href="https://maxshashkov.tech/"
+      >Android engineer blog</a
+    >
+    <a
+      class="btn-dark ml-6 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.png)_left_center/_auto_theme('spacing.6')_no-repeat] [transition:_background-position_0.4s_steps(5)] dark:[background-position:right]"
+    ></a>
+  </div>
+
+  <a
+    class="btn-menu relative z-50 -mr-8 flex h-[5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+  ></a>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = `"#fbfbfb"`.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/about/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="/contact/"
+        >Contact</a
+      >
+      
+    </nav>
+    
+
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-10rem)] max-w-3xl px-8 pt-20 pb-32 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-20">
+    <h1 class="!my-0 pb-2.5">Managing device screen brightness in your android application</h1>
+
+    
+    <div class="text-sm opacity-60">
+      
+      <time>Feb 26, 2023</time>
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>Why might you need to control the brightness of the device screen? For example: You are developing an application that displays QR codes that are read by the scanner. For better readability, we need to maximize image contrast and for that we can change the brightness to the maximum.</p>
+<p>Before start to control screen brightness, we must answer for one question: &ldquo;Do we want to control the brightness of the screen only when our app is active, or does it need to record the setting value after our app is shut down?&rdquo;</p>
+<h3 id="scenario-1-in-app-screen-brightness-management">Scenario 1: In-app screen brightness management</h3>
+<p>In this case, it will be enough to refer to the class <code>WindowManager.LayoutParams</code> and change one of its parameters. You can do this inside your Activity as follows:</p>
+<script type="application/javascript" src="https://gist.github.com/healthdatastore/0d180816a4ff778e77f7a4d7a39f344f.js"></script>
+
+<p>Here, the parameter: <code>desiredScreenBrightness</code> is a number that varies from <code>0f</code> to <code>1.0f</code>.</p>
+<p>Do we need to restore the previous screen brightness when leaving the Activity?</p>
+<p>The answer is: &ldquo;No&rdquo;. Since for each Activity we have a <code>Window</code> instance, which in turn has its own attributes <code>WindowManager.LayoutParams</code>, stored in the <code>mWindowAttributes</code> field.</p>
+<h3 id="scenario-2-apps-state-independent-screen-brightness-management">Scenario 2: App&rsquo;s state independent screen brightness management</h3>
+<p>To control the brightness of your device’s screen without being tied to your app’s lifecycle, you must meet the following conditions:</p>
+<ul>
+<li>the app must be signed as a system, if your target API version is 23 or higher <a href="https://developer.android.com/guide/topics/permissions/overview#signature">link</a></li>
+<li>you should add this permission to the manifest file:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;uses-permission</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.permission.WRITE_SETTINGS&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span></code></pre></div><blockquote>
+<p><em><strong>NOTE:</strong></em> adding <code>tools:ignore=&quot;ProtectedPermissions&quot;</code> only helps to workaround android linter checks. But at runtime for api levels 23 or higher this permission cannot be changed if your app is not signed as a system</p>
+</blockquote>
+<ul>
+<li>If your app&rsquo;s target sdk version is 23 or higher <code>Settings.ACTION_MANAGE_WRITE_SETTINGS</code> permission must be requested at runtime</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>In 99% cases scenario 1 should be sufficient to your needs as an app developer unless you are not a system developer, who creates third-party operating system or a new device.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  <nav
+    class="mt-24 flex rounded-lg bg-black/[3%] p-1.5 text-lg dark:bg-white/[8%]"
+  >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-md p-6 pl-3 no-underline hover:bg-black/[2%]"
+      href="https://maxshashkov.tech/post/ssh_tunneling/"
+      ><span>How to establish SSH tunelling between host and remote server</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2023
+    <a class="link" href="https://maxshashkov.tech/">Android engineer blog</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >▷ Paper 6</a
+  >
+</footer>
+
+  </body>
+</html>

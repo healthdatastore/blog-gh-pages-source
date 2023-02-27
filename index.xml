@@ -6,7 +6,17 @@
     <description>Recent content on Android engineer blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Jan 2023 11:36:01 +0300</lastBuildDate><atom:link href="https://maxshashkov.tech/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Feb 2023 11:50:01 +0300</lastBuildDate><atom:link href="https://maxshashkov.tech/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Managing device screen brightness in your android application</title>
+      <link>https://maxshashkov.tech/post/screen_brightness/</link>
+      <pubDate>Sun, 26 Feb 2023 11:50:01 +0300</pubDate>
+      
+      <guid>https://maxshashkov.tech/post/screen_brightness/</guid>
+      <description>Why might you need to control the brightness of the device screen? For example: You are developing an application that displays QR codes that are read by the scanner. For better readability, we need to maximize image contrast and for that we can change the brightness to the maximum.
+Before start to control screen brightness, we must answer for one question: &amp;ldquo;Do we want to control the brightness of the screen only when our app is active, or does it need to record the setting value after our app is shut down?</description>
+    </item>
+    
     <item>
       <title>How to establish SSH tunelling between host and remote server</title>
       <link>https://maxshashkov.tech/post/ssh_tunneling/</link>
@@ -32,7 +42,7 @@ Let&amp;rsquo;s assume we have a remote server named &amp;ldquo;host 2&amp;rdquo
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://maxshashkov.tech/contact/</guid>
-      <description>How to contact with me email telegram </description>
+      <description>How to contact with me email telegram linkedIn </description>
     </item>
     
   </channel>
