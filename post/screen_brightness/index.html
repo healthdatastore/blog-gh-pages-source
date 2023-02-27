@@ -248,7 +248,7 @@ Before start to control screen brightness, we must answer for one question: &ldq
 <h3 id="scenario-2-apps-state-independent-screen-brightness-management">Scenario 2: App&rsquo;s state independent screen brightness management</h3>
 <p>To control the brightness of your device’s screen without being tied to your app’s lifecycle, you must meet the following conditions:</p>
 <ul>
-<li>the app must be signed as a system, if your target API version is 23 or higher <a href="https://developer.android.com/guide/topics/permissions/overview#signature">link</a></li>
+<li>the app must be signed as a system, if your target API version is 23 or higher (<a href="https://developer.android.com/guide/topics/permissions/overview#signature">link</a>)</li>
 <li>you should add this permission to the manifest file:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;uses-permission</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.permission.WRITE_SETTINGS&#34;</span><span style="color:#f92672">/&gt;</span>
