@@ -117,7 +117,7 @@ Before start to control screen brightness, we must answer for one question: &ldq
 <meta itemprop="description" content="Why might you need to control the brightness of the device screen? For example: You are developing an application that displays QR codes that are read by the scanner. For better readability, we need to maximize image contrast and for that we can change the brightness to the maximum.
 Before start to control screen brightness, we must answer for one question: &ldquo;Do we want to control the brightness of the screen only when our app is active, or does it need to record the setting value after our app is shut down?"><meta itemprop="datePublished" content="2023-02-26T11:50:01+03:00" />
 <meta itemprop="dateModified" content="2023-02-26T11:50:01+03:00" />
-<meta itemprop="wordCount" content="318">
+<meta itemprop="wordCount" content="311">
 <meta itemprop="keywords" content="" />
   
   <meta name="twitter:card" content="summary"/>
@@ -248,18 +248,17 @@ Before start to control screen brightness, we must answer for one question: &ldq
 <h3 id="scenario-2-apps-state-independent-screen-brightness-management">Scenario 2: App&rsquo;s state independent screen brightness management</h3>
 <p>To control the brightness of your device’s screen without being tied to your app’s lifecycle, you must meet the following conditions:</p>
 <ul>
-<li>the app must be signed as a system, if your target API version is 23 or higher (<a href="https://developer.android.com/guide/topics/permissions/overview#signature">link</a>)</li>
 <li>you should add this permission to the manifest file:</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;uses-permission</span> <span style="color:#a6e22e">android:name=</span><span style="color:#e6db74">&#34;android.permission.WRITE_SETTINGS&#34;</span><span style="color:#f92672">/&gt;</span>
 </span></span></code></pre></div><blockquote>
-<p><em><strong>NOTE:</strong></em> adding <code>tools:ignore=&quot;ProtectedPermissions&quot;</code> only helps to workaround android linter checks. But at runtime for api levels 23 or higher this permission cannot be changed if your app is not signed as a system</p>
+<p><em><strong>NOTE:</strong></em> adding <code>tools:ignore=&quot;ProtectedPermissions&quot;</code> helps to workaround android linter checks.</p>
 </blockquote>
 <ul>
-<li>If your app&rsquo;s target sdk version is 23 or higher <code>Settings.ACTION_MANAGE_WRITE_SETTINGS</code> permission must be requested at runtime</li>
+<li>If your app&rsquo;s target sdk version is 23 or higher <code>Settings.ACTION_MANAGE_WRITE_SETTINGS</code> intent must be sent at runtime. This permission is so-called &ldquo;Special permission&rdquo;. The way to request this permission differs from standard runtime permission request. Each special permission has its own check method. For our case it&rsquo;s <code>Settings.System.canWrite()</code>.</li>
 </ul>
 <h3 id="conclusion">Conclusion</h3>
-<p>In 99% cases scenario 1 should be sufficient to your needs as an app developer unless you are not a system developer, who creates third-party operating system or a new device.</p>
+<p>In most cases scenario 1 should be sufficient to your needs as an app developer unless you are need the app which can manipulate system screen brightness setting. And here Scenario 2 could be useful.</p>
 </section>
 
   
